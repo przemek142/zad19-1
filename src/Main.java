@@ -8,10 +8,10 @@ public class Main {
         try {
             numbers = scanner.nextLine();
             Calc calc = new Calc(numbers);
-            System.out.println(calc.getMostRepeatedNumber(calc.getList()));
+            System.out.println(calc.getErrors());
+            System.out.println("wynik: " + calc.getMostRepeatedNumber(calc.getList()));
         } catch (NoSuchElementException e) {
             System.err.println(e);
         }
-
     }
 }

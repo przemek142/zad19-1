@@ -5,7 +5,11 @@ import java.util.Map;
 public class Calc {
 
     private ArrayList<Integer> list = new ArrayList<>();
+    private String errors = "";
 
+    public String getErrors() {
+        return errors;
+    }
 
     public Calc(String numbers) {
         String listTemp[] = numbers.replaceAll("\\[|\\]|\\s*", "").split(",");
@@ -13,7 +17,7 @@ public class Calc {
             try {
                 list.add(Integer.parseInt(item));
             } catch (NumberFormatException e) {
-                System.out.println('"' + item + "\" to nie liczba, nie została dodana.");
+                errors += String.format('"' + item + "\" to nie liczba. Nie została dodana.\n");
             }
         }
         if (list.isEmpty())
@@ -25,13 +29,9 @@ public class Calc {
         int mostRepeatedNumber = 0;
 
         for (Integer number : list) {
-            if (!map.containsKey(number))
-                map.put(number, 1);
-            else {
-                map.put(number, map.get(number) + 1);
-            }
+            map.put(number, map.getOrDefault(number, 0) + 1);
         }
-
+        
         boolean firstIteration = true;
         for (Integer key : map.keySet()) {
             if (firstIteration)
